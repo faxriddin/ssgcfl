@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block meta_header %}
+<meta name="description" content="A blog with my some development works.">
+{% endblock %}
+
+{% block title %} My development works Blog {% endblock %}
+{% block css %}<style>{% include "css/base.css" %}</style>{% endblock %}
+
+{% block content %}
+<div class="row">
+ <div class="c12">
+  <h1 style="display:none">Blog Tutorials</h1>
+  {% for a in articles %}
+   <h2 style="padding-top:0;margin-top:0"><a href="/article/{{ a.slug }}.html">{{ a.title }}</a></h2>
+   {% if a.date %}
+   <div style="font-size:12px;color:#666;margin:0 0 10px">           
+             Posted on {{ a.date.strftime('%B %d, %Y') }}.           
+   </div>
+    {% endif %}
+    
+    {{ a.content|truncate(350) }} (<a href="/blog/{{ a.slug }}.html">read more</a>)   
+  {% endfor %}
+ </div>
+</div>
+{% endblock %}
