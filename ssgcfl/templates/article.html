@@ -2,19 +2,14 @@
 
 {% block title %}{% if article %}{{ article.title }} - {% endif %}{% endblock %}
 
-{% block css %}
-<style>
-  {% include "css/base.css" %}
-</style>
-{% endblock %}
 
 {% block content %}
-{% if article %}
+
 <div class="row"> 
   <h1 style="font-size: 36px;">{{ article.title }}</h1>
   <div style="font-size:12px;color:#666;margin:0 0 10px">
    {% if article.date %}
-     Posted on {{ article.date.strftime('%B %d, %Y') }}.   
+     Posted on {{ article.date }}.
    {% endif %}
   </div> 
 </div>
@@ -30,4 +25,5 @@
   <div>
     Copyright©SSGCFL
   </div>
-{% endblock %}
+
+  {% endblock %}

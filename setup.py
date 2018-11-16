@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
         setup_requires=[],
-        include_package_data=True,
+        
         name='ssgcfl',
         version='0.0.1',
         url='https://github.com/faxriddin/ssgcfl',
@@ -14,10 +14,14 @@ setup(
         download_url='https://github.com/faxriddin/ssgcfl/tarball/master',
         packages = find_packages(),
         install_requires=[            
-            'docopt>=0.6.2'
+            'docopt>=0.6.2',
+            'jinja2>=2.10',
+            'frontmatter>=0.4.4',
+            'markdown2>=2.3.6',
+            'python-dateutil>=2.7.5',
             ],
         entry_points={
-            'console_scripts': ['ssgcfl = ssgcfl.ssgcfl:main']
+            'console_scripts': ['ssgcfl = ssgcfl.generator:main']
             },
         platforms=['any'],
         classifiers=[
@@ -28,4 +32,8 @@ setup(
             'Topic :: Text Processing :: Markup',
             'Topic :: Text Processing :: Markup :: HTML'
             ],
+        include_package_data=True,
+        data_files=[
+            ('templates',['ssgcfl/templates/base.html','ssgcfl/templates/index.html','ssgcfl/templates/article.html'])
+        ]
         )

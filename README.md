@@ -1,7 +1,7 @@
 SSGCFL
 ======
 
-SSGCFL is a static site generator that can generate html files from markdown and template files.
+SSGCFL (Static Site Generator Created For Learning) is a static site generator that can generate html files from markdown and template files.
 
 
 Features
@@ -22,6 +22,7 @@ Usage
 2. Extract downloaded archive file 
 3. From command line go to `{extracted_path}/ssgcfl`. In this folder you can see ssgcfl.py file.  
 4. For create project (site structure) you should enter follow command:
+    
     ``ssgcfl create_project project_path``
     - project_path - is path, where you want to create site folder
 5. After successfully command your directory (project_path) should contain follow structure of folders and files
@@ -41,15 +42,26 @@ Usage
     Example:
     
     File: `article1.md`
-    ```
-    Title: Article title
-    Meta: Article meta data.
-    Date: 2018-11-14 10:12
-    Tags: article_tag1, article_tag2
-
+    
+    \---
+    
+    title: Article title
+    
+    date: 2018-11-14 10:12
+    
+    tags: article_tag1, article_tag2
+    
+    \---    
+    
     Content of the article.  
-    ```
-
+7. After, you can begin to make site with command make_site in the project folder:
+    
+    ``ssgcfl make_site``
+8. To run your site you can use integrated http-server of python:
+    
+    ``python -m http.server 8000 --bind 127.0.0.1``
+    
+    then on browser open the url <http://127.0.0.1:8000> 
 
 Help
 ----
