@@ -19,6 +19,7 @@ setup(
             'frontmatter>=0.4.4',
             'markdown2>=2.3.6',
             'python-dateutil>=2.7.5',
+            'python-slugify>=0.0.1',
             ],
         entry_points={
             'console_scripts': ['ssgcfl = ssgcfl.generator:main']

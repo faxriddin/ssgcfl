@@ -3,4 +3,4 @@ jinja2>=2.10
 frontmatter>=0.4.4
 markdown2>=2.3.6
 python-dateutil>=2.7.5
-slugify>=0.0.1
+python-slugify>=0.0.1
