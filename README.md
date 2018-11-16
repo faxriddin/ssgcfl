@@ -79,3 +79,12 @@ Contributing
 
 If something is wrong or could be improved, let me know or submit a pull request.
 
+
+Thank you very much 
+-------------------
+
+While studying and creating the SSGSFL package, following codes was used for understanding SSG architecture. 
+For this, I am grateful to these developers that developed it: 
+- [Bark](https://github.com/Battleroid/bark) 
+- [Pelican](https://github.com/getpelican/pelican)
+
