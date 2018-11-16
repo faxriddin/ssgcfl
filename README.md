@@ -14,18 +14,21 @@ Features
 Install
 -------
 
-`python setup.py install`
+1. [Download](https://github.com/faxriddin/ssgcfl/tarball/master) source code from master branch
+2. Extract downloaded archive file 
+3. From command line go to `{extracted_dir_name}/ssgcfl`. In this folder you can see `generator.py` file.
+4. Enter follow command:
+
+    `python setup.py install`
 
 Usage
 -----
-1. [Download](https://github.com/faxriddin/ssgcfl/tarball/master) source code from master branch
-2. Extract downloaded archive file 
-3. From command line go to `{extracted_path}/ssgcfl`. In this folder you can see ssgcfl.py file.  
-4. For create project (site structure) you should enter follow command:
+  
+5. For create project (site structure) you should enter follow command:
     
     ``ssgcfl create_project project_path``
     - project_path - is path, where you want to create site folder
-5. After successfully command your directory (project_path) should contain follow structure of folders and files
+6. After successfully command your directory (project_path) should contain follow structure of folders and files
     - \[project_path\]
     
         - templates
@@ -38,7 +41,7 @@ Usage
         - content
         
         `settings.json`
-6. Now you can start make articles on the "content" directory. For this you should create "markdown" file with extension .md and enter the data of article by follow rule.
+7. Now you can start make articles on the "content" directory. For this you should create "markdown" file with extension .md and enter the data of article by follow rule.
     Example:
     
     File: `article1.md`
@@ -54,10 +57,10 @@ Usage
     \---    
     
     Content of the article.  
-7. After, you can begin to make site with command make_site in the project folder:
+8. After, you can begin to make site with command make_site in the project folder:
     
     ``ssgcfl make_site``
-8. To run your site you can use integrated http-server of python:
+9. To run your site you can use integrated http-server of python:
     
     ``python -m http.server 8000 --bind 127.0.0.1``
     
@@ -65,7 +68,7 @@ Usage
 
 Help
 ----
-    ssgcfl [options] (-h|--help|--version)
+10.    ssgcfl [options] (-h|--help|--version)
     
     -h, --help       Show this message.
     --version        Show version.
