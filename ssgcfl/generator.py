@@ -20,18 +20,18 @@ import shutil
 import sys
 import os
 from jinja2 import Environment, FileSystemLoader
-from . import article as ar
-
+from . import article as article_c
+from . import settings as settings_c 
 
 SOURCE_URLS = {
     'templates':'templates',    
 }
 
-ARTICLES_SORT_REVERSE_BY_DATE = True;
+ARTICLES_SORT_REVERSE_BY_DATE = True
 
 class Generator(object):
     def __init__(self, settings):
-        self.settings = Settings(settings)
+        self.settings = settings_c.Settings(settings)
         self.files = []
         self.articles = []
         self.jinja = Environment()
@@ -57,7 +57,7 @@ class Generator(object):
         Order by date.
         """
         for f in self.files:
-            article = ar.Article(f, self.settings)
+            article = article_c.Article(f, self.settings)
             self.articles.append(article)
 
         #art = self.articles[0]
@@ -119,15 +119,6 @@ class Generator(object):
         print ('Finished')
 
 
-class Settings(object):
-    def __init__(self, settings):
-        self.templates = settings.get('templates', 'templates')        
-        self.content = settings.get('content', 'content')
-        self.output = settings.get('output', 'output')
-        self.site_name = settings.get('site_name', 'My Blog')
-        self.site_author = settings.get('site_author', 'Anonymous')
-
-
 def create_project(location, src_path):
     """
     Create new blank site at location. Includes basic settings file, templates,
@@ -136,7 +127,7 @@ def create_project(location, src_path):
     if not os.path.exists(location):
         os.mkdir(location)
     
-    defaults = Settings({})
+    defaults = settings_c.Settings({})
     
     if not os.path.exists(os.path.join(location, defaults.templates)):
         os.mkdir(os.path.join(location, defaults.templates))
