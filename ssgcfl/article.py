@@ -11,9 +11,9 @@ class Article(object):
         filename = os.path.join(settings.content, filename)
         self.filename = filename
         self.matter = ft.load(filename).to_dict()
-        #print(self.file_content)
+        
         self.title = self.matter.get('title', 'Untitled')
-        #print(self.title)
+        
 
         self.slug = self.matter.get('slug', slugify(self.title))
         self.url = '.'.join([self.slug, 'html'])
@@ -24,8 +24,7 @@ class Article(object):
             self.date = self.get_create_time(filename)
         self.content = self.matter.get('content', '')
         self.html = Markdown().convert(self.content)
-        #print("bu html")
-        #print(self.html)
+        
         self.rendered = jinja2.Template(self.html).render(article=self, settings=settings)
 
     def get_create_time(self, filename):

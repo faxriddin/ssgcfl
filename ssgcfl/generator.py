@@ -88,35 +88,19 @@ class Generator(object):
         directory.
         """
         article_tmpl = self.jinja.get_template('article.html')
-        #print(article_tmpl)
-        print("shu yerdaman")
+        
+        
         for article in self.articles:
-            with open(os.path.join(self.settings.output, article.url), 'w') as f:
-                print(os.path.join(self.settings.output, article.url))
+            with open(os.path.join(self.settings.output, article.url), 'w') as f:                
                 f.write(article_tmpl.render(article=article))
 
-    def generate(self):
-        print("started articles loading")
-        self.load_articles()
-        print("finished articles loading")
-
-        print("start: order by date")
+    def generate(self):        
+        self.load_articles()        
         self.order_articles()
-        print("finish: order by date")
-
-        print("start: create output")
-        self.create_output_dir()
-        print("finished output")
-
-        print("start: generate index file")
-        self.generate_index()
-        print("finished generating index file")
-
-        print("start: generate articles")
+        self.create_output_dir()        
+        self.generate_index()        
         self.generate_articles()
-        print("finished generating articles")
-
-        print ('Finished')
+        print ('Site successfully generated')
 
 
 def create_project(location, src_path):
@@ -170,10 +154,8 @@ def parse_args(arguments):
             generator = Generator(settings)
             generator.generate()
             sys.exit(0)
-        config = open('settings.json', 'r').read()
-        #print(config)
-        settings = json.loads(config)
-        #print(config)
+        config = open('settings.json', 'r').read()        
+        settings = json.loads(config)        
         generator = Generator(settings)
         generator.generate()
     sys.exit(0)
