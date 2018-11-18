@@ -20,18 +20,21 @@ import shutil
 import sys
 import os
 from jinja2 import Environment, FileSystemLoader
-from . import article as article_c
-from . import settings as settings_c 
+from . import article as article_class
+from . import settings as settings_class
+
 
 SOURCE_URLS = {
     'templates':'templates',    
 }
 
+
 ARTICLES_SORT_REVERSE_BY_DATE = True
 
-class Generator(object):
+
+class Generator:
     def __init__(self, settings):
-        self.settings = settings_c.Settings(settings)
+        self.settings = settings_class.Settings(settings)
         self.files = []
         self.articles = []
         self.jinja = Environment()
@@ -56,26 +59,25 @@ class Generator(object):
         """
         Order by date.
         """
-        for f in self.files:
-            article = article_c.Article(f, self.settings)
-            self.articles.append(article)
 
-        #art = self.articles[0]
+        for f in self.files:
+            article = article_class.Article(f, self.settings)
+            self.articles.append(article)
 
         self.articles = sorted(self.articles, key=lambda a: a.date, reverse=ARTICLES_SORT_REVERSE_BY_DATE)
 
-
-
     def create_output_dir(self):
         """
-        Creating output directory
+        Creating site output directory. In this directory will be save all
+        generated site resources.
         """
+
         if not os.path.exists(self.settings.output):
             os.mkdir(self.settings.output)
 
     def generate_index(self):
         """
-        Create the index, save in output.
+        Creating the index file, and save in output.
         """
 
         index_tmpl = self.jinja.get_template('index.html')
@@ -87,9 +89,8 @@ class Generator(object):
         Generate articles, save output in appropriate category or default output
         directory.
         """
+
         article_tmpl = self.jinja.get_template('article.html')
-        
-        
         for article in self.articles:
             with open(os.path.join(self.settings.output, article.url), 'w') as f:                
                 f.write(article_tmpl.render(article=article))
@@ -108,10 +109,11 @@ def create_project(location, src_path):
     Create new blank site at location. Includes basic settings file, templates,
     and content directory.
     """
+
     if not os.path.exists(location):
         os.mkdir(location)
     
-    defaults = settings_c.Settings({})
+    defaults = settings_class.Settings({})
     
     if not os.path.exists(os.path.join(location, defaults.templates)):
         os.mkdir(os.path.join(location, defaults.templates))
@@ -130,7 +132,8 @@ def create_project(location, src_path):
     with open(os.path.join(location, 'settings.json'), 'w') as f:
         f.write(json.dumps(defaults.__dict__))
 
-    return True
+    print("Congratulation!")
+    print("Project successfully created! :)")
 
 
 def parse_args(arguments):
@@ -138,11 +141,7 @@ def parse_args(arguments):
 
     if arguments['create_project']:
         if arguments['<project_name>']:
-            if create_project(arguments['<project_name>'], src_path):
-                print("Congratulation!")
-                print("Project successfully created! :)")
-            else:
-                print("Fail on project creating! :(")
+            create_project(arguments['<project_name>'], src_path)
             sys.exit(0)
         create_project('myblog', src_path)
 
@@ -164,8 +163,4 @@ def parse_args(arguments):
 def main():
     arguments = docopt(__doc__, version='SSGCFL {}'.format(__version__))
     parse_args(arguments)
-
-
-#if __name__ == '__main__':
-#   main()
 
