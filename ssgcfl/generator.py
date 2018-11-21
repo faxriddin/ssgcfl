@@ -33,6 +33,34 @@ ARTICLES_SORT_REVERSE_BY_DATE = True
 
 
 class Generator:
+    """
+        Main class that used for generating sites.
+
+
+        Attributes
+        ----------
+        settings : Settings
+            Settings object that has global settings params for creating project structure.
+        files : list
+            all article files that located in the "content" directory
+        articles : list
+            list of Article objects, where all articles loaded from content
+        jinja : Environment
+            jinja local environment. Used loader method and global`s variables.
+
+        Methods
+        -------
+        load_articles()
+            load markdown files from content to files attribute
+        order_articles()
+            initialize articles attribute from loaded files then sort by date their
+        create_output_dir()
+            creating output dir from manually using settings or default settings
+        generate_index()
+            generating index file from index.html template by rendering jinja template
+        self.generate_articles()
+    """
+
     def __init__(self, settings):
         self.settings = settings_class.Settings(settings)
         self.files = []
@@ -54,15 +82,13 @@ class Generator:
             if f.endswith(('.md', '.MD', '.markdown')):
                 print(" Loaded: " + f)
                 self.files.append(f)
+                article = article_class.Article(f, self.settings)
+                self.articles.append(article)
 
     def order_articles(self):
         """
         Order by date.
         """
-
-        for f in self.files:
-            article = article_class.Article(f, self.settings)
-            self.articles.append(article)
 
         self.articles = sorted(self.articles, key=lambda a: a.date, reverse=ARTICLES_SORT_REVERSE_BY_DATE)
 
@@ -164,3 +190,5 @@ def main():
     arguments = docopt(__doc__, version='SSGCFL {}'.format(__version__))
     parse_args(arguments)
 
+if __name__ == '__main__':
+    main()
